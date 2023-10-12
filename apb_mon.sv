@@ -1,9 +1,9 @@
 `include apb_txn;
 class apb_mon_sb;
 	virtual apb_if.monitor_ip_mp if;
-	mailbox #(apb_txn) mon2sb;
+	mailbox #(apb_txn) mon2sb,mon2rm;
 	
-	apb_txn txn,txn2sb;
+	apb_txn txn,txn2sb,txn2rm;
 	
 	function new(mailbox#(apb_txn) mon2rm,mon2sb, virtual apb_if.monitor_ip_mp if);
 		this.if=if;
@@ -18,6 +18,11 @@ class apb_mon_sb;
 			txn.prdata[i]=if.monitor_ip_cb.prdata;
 			txn.penable=if.monitor_ip_cb.penable;
 			txn.pready=if.monitor_ip_cb.pready;
+			txn.psel=if.monitor_ip_cb.psel;
+			txn.ready=if.monitor_ip_cb.pready;
+			txn.pwdata=if.monitor_ip_cb.pwdata;
+			txn.pwrite=if.monitor_ip_cb.pwrite;
+			txn.presetn=if.monitor_ip_cb.presetn;
 			i++;
 			end
 	endtask: monitor
@@ -28,7 +33,10 @@ class apb_mon_sb;
 			forever begin
 				monitor();
 				txn2sb=new txn;
+				txn2rm=new txn;
 				mon2sb.put(txn2sb);
+				mon2rm.put(txn2rm)
+				txn=new();
 			end
 		join_none
 	endtask
