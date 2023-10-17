@@ -1,10 +1,3 @@
-`include "apb_gen"
-`include "apb_drv"
-`include "apb_mon"
-//`include "apb_txn" | not required
-`include "apb_sb"
-//`include "apb_if" | not required
-`include "apb_rm"
 class apb_env;
 
 	apb_drv drv;
