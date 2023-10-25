@@ -14,7 +14,7 @@ interface apb_if;
 	endclocking
 	
 	clocking slave_cb@(posedge pclk);
-		input psel,pwrite,penable,pwdata,paddr,pready;
+		input psel,pwrite,penable,prdata,paddr,pready;
 		output prdata;
 	endclocking
 	
