@@ -2,8 +2,7 @@ class apb_test;
 
 	apb_env env;
 	
-	write_txn wr_txn;
-	read_txn read_txn;
+	apb_txn wr_txn, read_txn;
 	
 	virtual apb_if.master_mp mmp;
 	virtual apb_if.slave_mp smp;
